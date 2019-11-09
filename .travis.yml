@@ -3,20 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t mia/react-docker-trevis -f Dockerfile.dev .
+  - docker build -t mia/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run mia/react-docker-trevis npm run test -- --coverage
-
-deploy:
-  provider: elasticbeanstalk
-  region: "ap-northeast-2"
-  app: "react-docker-trevis"
-  env: "ReactDockerTrevis-env"
-  bucket_name: "elasticbeanstalk-ap-northeast-2-841208922106"
-  bucket-path: "react-docker-trevis"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+  - docker run mia/docker-react npm run test -- --coverage
